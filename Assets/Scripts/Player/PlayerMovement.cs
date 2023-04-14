@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //Code for action on mouse moving right
             //transform.eulerAngles += new Vector3(looker, 0, 0);
-            m_HitBox.transform.rotation = Quaternion.Euler(0.0f, turner, gameObject.transform.rotation.z * -1.0f);
+            //m_HitBox.transform.rotation = Quaternion.Euler(0.0f, turner, gameObject.transform.rotation.z * -1.0f);
         }
         //Applying gravity to the controller
         moveDirection.y -= gravity * Time.deltaTime;
