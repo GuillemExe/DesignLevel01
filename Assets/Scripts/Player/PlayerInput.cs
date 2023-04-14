@@ -6,11 +6,10 @@ using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : MonoBehaviour, IInput
 {
     public Action<Vector2> OnMovementInput { get; set; }
     public Action<Vector3> OnMovementDirectionInput { get; set; }
-
 
 
     // Start is called before the first frame update
