@@ -32,23 +32,14 @@ public class CheckpointManager : MonoBehaviour
 
     private void SpawnOnPoint(int StepIndex)
     {
-
-        Debug.Log("SpawnPoints.Count: " + SpawnPoints.Count);
-
         int DesiredIndex = CurrentIndex + StepIndex;
 
         if (DesiredIndex < 0)
-        {
             DesiredIndex = SpawnPoints.Count;
-        } 
         else if (DesiredIndex + 1 > SpawnPoints.Count)
-        {
             DesiredIndex = 0;
-        }
 
         CurrentIndex = DesiredIndex;
-
-        Debug.Log("INDEX: " + DesiredIndex);
 
         Rb.isKinematic = true;
 
