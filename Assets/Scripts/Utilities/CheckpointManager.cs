@@ -35,7 +35,7 @@ public class CheckpointManager : MonoBehaviour
         int DesiredIndex = CurrentIndex + StepIndex;
 
         if (DesiredIndex < 0)
-            DesiredIndex = SpawnPoints.Count;
+            DesiredIndex = SpawnPoints.Count - 1;
         else if (DesiredIndex >= SpawnPoints.Count)
             DesiredIndex = 0;
 

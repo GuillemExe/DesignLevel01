@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CharacterControllerV1 : MonoBehaviour
@@ -21,6 +22,9 @@ public class CharacterControllerV1 : MonoBehaviour
     private Rigidbody rb; // Referencia al Rigidbody
     public Transform camTransform; // Referencia a la transformación de la cámara
 
+    // DEBUG
+    [SerializeField] private TextMeshProUGUI fallVelocity;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -32,6 +36,8 @@ public class CharacterControllerV1 : MonoBehaviour
 
     void Update()
     {
+        fallVelocity.text = "Fall-Y: " + Mathf.Round(rb.velocity.y * 100f) / 10000f;
+        
         // Rotar la cámara con el ratón
         // float mouseX = Input.GetAxis("Mouse X");
         // camTransform.RotateAround(transform.position, Vector3.up, mouseX * lookSpeed);
