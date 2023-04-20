@@ -49172,10 +49172,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4727780444854259698, guid: 6b4c812c6390a394ea4b1e68608024cc,
-        type: 3}
-      propertyPath: fallVelocity
+    - target: {fileID: 866768566, guid: 6b4c812c6390a394ea4b1e68608024cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 866768567, guid: 6b4c812c6390a394ea4b1e68608024cc, type: 3}
+      propertyPath: m_Material
       value: 
+      objectReference: {fileID: 13400000, guid: 26309a0bc0bda6a45be5500ca9fcc636,
+        type: 2}
+    - target: {fileID: 866768567, guid: 6b4c812c6390a394ea4b1e68608024cc, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4727780444854259698, guid: 6b4c812c6390a394ea4b1e68608024cc,
         type: 3}

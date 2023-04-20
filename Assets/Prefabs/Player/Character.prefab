@@ -122,6 +122,7 @@ MonoBehaviour:
   smoothness: 5
   sensitivity: 2
   maxLife: 100
+  currentLifeSlider: {fileID: 0}
   velocityYToHitLow: -12.5
   velocityYToHitNormal: -15
   velocityYToHitCritical: -17.5
@@ -130,7 +131,6 @@ MonoBehaviour:
   normalDamage: 50
   criticalDamage: 75
   instaKillDamage: 125
-  fallVelocity: {fileID: 0}
 --- !u!1 &4727780445043723272
 GameObject:
   m_ObjectHideFlags: 0

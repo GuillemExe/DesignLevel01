@@ -23,9 +23,9 @@ public class CharacterControllerV1 : MonoBehaviour
     [SerializeField] private float jumpChargeLimit = 0.0f; // Límite de carga del salto
     [SerializeField] private float jumpChargeMax = 1f; // Máximo de carga del salto
     [SerializeField] private float lookSpeed = 5f; // Velocidad de rotación de la cámara
-    [SerializeField] [Range(1f, 1.5f)] private float jumpOnUpMultiplier = 1.05f;
+    [SerializeField][Range(1f, 1.5f)] private float jumpOnUpMultiplier = 1.05f;
 
-    [Header("Basic movement HUD")] 
+    [Header("Basic movement HUD")]
     [SerializeField] private Slider loadJumpSlider;
 
     [Header("Camera movement")]
@@ -61,6 +61,14 @@ public class CharacterControllerV1 : MonoBehaviour
     [Header("Fall damage HUD")]
     private float saveVelocityYToHit;
 
+    [Header("Collider")]
+    [SerializeField] private SphereCollider sphereCollider;
+
+    public void SetStatusIsJumping(bool status)
+    {
+        isJumping = status;
+    }
+
     void Start()
     {
         // Basic
@@ -89,6 +97,11 @@ public class CharacterControllerV1 : MonoBehaviour
 
     void Update()
     {
+        if (rb.velocity.y < -1 || rb.velocity.y > 1)
+        {
+            isJumping = true;
+        }
+
         FallDamageCheck();
 
         // Rotar la cámara con el ratón
@@ -120,40 +133,42 @@ public class CharacterControllerV1 : MonoBehaviour
             rb.velocity = new Vector3(moveVelocity.x, rb.velocity.y, moveVelocity.z);
         }
 
-        // Saltar si se cumple la condición
-        if (Input.GetKey(KeyCode.Space))
-        {
-            // Mostramos el slider para enseñar la carga que lleva el jugador
-            loadJumpSlider.gameObject.SetActive(true);
-
-            // Congelamos la velocidad actual para hacer más preciso el salto, ojo que tienen cosas interesantes el quitarlo
-            rb.velocity = new Vector3(0, 0, 0);
-
-            // Si se está manteniendo pulsada la tecla espacio
-            if (jumpCharge < jumpChargeMax)
+        if (!isJumping) { 
+            // Saltar si se cumple la condición
+            if (Input.GetKey(KeyCode.Space))
             {
-                jumpCharge += jumpChargeRate * Time.deltaTime; // Incrementar la carga del salto
-                loadJumpSlider.value = jumpCharge; // Actualizamos el HUD
+                // Mostramos el slider para enseñar la carga que lleva el jugador
+                loadJumpSlider.gameObject.SetActive(true);
+
+                // Congelamos la velocidad actual para hacer más preciso el salto, ojo que tienen cosas interesantes el quitarlo
+                rb.velocity = new Vector3(0, 0, 0);
+
+                // Si se está manteniendo pulsada la tecla espacio
+                if (jumpCharge < jumpChargeMax)
+                {
+                    jumpCharge += jumpChargeRate * Time.deltaTime; // Incrementar la carga del salto
+                    loadJumpSlider.value = jumpCharge; // Actualizamos el HUD
+                }
             }
-        }
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            // Ocultamos el slider una vez ya comenzó el salto
-            loadJumpSlider.gameObject.SetActive(false);
-
-            // Congelamos la velocidad actual para hacer más preciso el salto, ojo que tienen cosas interesantes el quitarlo
-            rb.velocity = new Vector3(0, 0, 0);
-
-            // Si se suelta la tecla espacio
-            if (!isJumping && jumpCharge > jumpChargeLimit)
+            if (Input.GetKeyUp(KeyCode.Space))
             {
-                // Si no se está ejecutando el salto y se ha cargado lo suficiente
-                Vector3 jumpDirection = transform.forward + Vector3.up * jumpOnUpMultiplier; // Dirección del salto
-                rb.AddForce(jumpDirection * jumpForce * jumpCharge, ForceMode.Impulse); // Ejecutar el salto
-                isJumping = true; // Marcar que se está ejecutando el salto
+                // Ocultamos el slider una vez ya comenzó el salto
+                loadJumpSlider.gameObject.SetActive(false);
+
+                // Congelamos la velocidad actual para hacer más preciso el salto, ojo que tienen cosas interesantes el quitarlo
+                rb.velocity = new Vector3(0, 0, 0);
+
+                // Si se suelta la tecla espacio
+                if (!isJumping && jumpCharge > jumpChargeLimit)
+                {
+                    // Si no se está ejecutando el salto y se ha cargado lo suficiente
+                    Vector3 jumpDirection = transform.forward + Vector3.up * jumpOnUpMultiplier; // Dirección del salto
+                    rb.AddForce(jumpDirection * jumpForce * jumpCharge, ForceMode.Impulse); // Ejecutar el salto
+                    isJumping = true; // Marcar que se está ejecutando el salto
+                }
+                jumpCharge = 0.25f; // Resetear la carga del salto
             }
-            jumpCharge = 0.25f; // Resetear la carga del salto
         }
     }
 
@@ -191,7 +206,8 @@ public class CharacterControllerV1 : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Ground")
+        // Lo capamos en velocidad para evitar que salte entre paredes
+        if (col.gameObject.tag == "Ground" && rb.velocity.y > -1 && rb.velocity.y < 1)
         {
             if (typeFallDamage != TypeFallDamage.None) // Comprobamos si tiene que recibir daño dada a su velocidad
             {
