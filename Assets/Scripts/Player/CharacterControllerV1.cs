@@ -49,6 +49,11 @@ public class CharacterControllerV1 : MonoBehaviour
     [SerializeField] private float velocityYToHitNormal = -20.0f;
     [SerializeField] private float velocityYToHitCritical = -25.0f;
     [SerializeField] private float velocityYToHitInstaKill = -30.0f;
+    [SerializeField] private float lowDamage = 25.0f;
+    [SerializeField] private float normalDamage = 50.0f;
+    [SerializeField] private float criticalDamage = 75.0f;
+    [SerializeField] private float instaKillDamage = 125.0f;
+    private float setDamage;
     private TypeFallDamage typeFallDamage = TypeFallDamage.None;
 
     [Header("Fall damage HUD")]
@@ -57,15 +62,22 @@ public class CharacterControllerV1 : MonoBehaviour
 
     void Start()
     {
+        // Basic
         rb = GetComponent<Rigidbody>();
         currentRotation = transform.eulerAngles.y;
 
+        // Game debug
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+        // Life
+        currentLife = maxLife;
+
+        // Refresh HUD
         loadJumpSlider.maxValue = jumpChargeMax;
         loadJumpSlider.minValue = jumpCharge;
 
+        // Jump
         loadJumpSlider.gameObject.SetActive(false);
     }
 
@@ -143,16 +155,35 @@ public class CharacterControllerV1 : MonoBehaviour
 
     void FallDamageCheck()
     {
+        
         if (rb.velocity.y < velocityYToHitInstaKill)
+        {
+            Debug.Log("Velocity Y: " + rb.velocity.y);
             typeFallDamage = TypeFallDamage.InstaKill;
+            setDamage = instaKillDamage;
+        }
         else if (rb.velocity.y < velocityYToHitCritical)
+        {
+            Debug.Log("Velocity Y: " + rb.velocity.y);
             typeFallDamage = TypeFallDamage.Critical;
+            setDamage = criticalDamage;
+        }
         else if (rb.velocity.y < velocityYToHitNormal)
+        {
+            Debug.Log("Velocity Y: " + rb.velocity.y);
             typeFallDamage = TypeFallDamage.Normal;
+            setDamage = normalDamage;
+        }
         else if (rb.velocity.y < velocityYToHitLow)
+        {
+            Debug.Log("Velocity Y: " + rb.velocity.y);
             typeFallDamage = TypeFallDamage.Low;
+            setDamage = lowDamage;
+        }
         else
+        {
             typeFallDamage = TypeFallDamage.None;
+        }
     }
 
     void OnCollisionEnter(Collision col)
@@ -161,8 +192,9 @@ public class CharacterControllerV1 : MonoBehaviour
         {
             if (typeFallDamage != TypeFallDamage.None) // Comprobamos si tiene que recibir daño dada a su velocidad
             {
-                Debug.Log("HIT, velocity y: " + saveVelocityYToHit);
-            }
+                currentLife -= setDamage;
+                Debug.Log("Current life: " + currentLife);
+            }                
 
             isJumping = false; // Marcar que se ha terminado el salto
             typeFallDamage = TypeFallDamage.None; // Marcamos que no recibira más daño

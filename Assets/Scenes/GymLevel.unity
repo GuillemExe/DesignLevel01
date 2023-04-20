@@ -48924,11 +48924,6 @@ PrefabInstance:
       propertyPath: loadJumpSlider
       value: 
       objectReference: {fileID: 458159668}
-    - target: {fileID: 4727780444854259698, guid: 6b4c812c6390a394ea4b1e68608024cc,
-        type: 3}
-      propertyPath: velocityYToHit
-      value: -15
-      objectReference: {fileID: 0}
     - target: {fileID: 4727780444854259706, guid: 6b4c812c6390a394ea4b1e68608024cc,
         type: 3}
       propertyPath: m_Name
@@ -48989,12 +48984,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4727780444854259709, guid: 6b4c812c6390a394ea4b1e68608024cc,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 26309a0bc0bda6a45be5500ca9fcc636,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b4c812c6390a394ea4b1e68608024cc, type: 3}
 --- !u!1001 &5712976515450490456
