@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.ProBuilder.AutoUnwrapSettings;
+using Vector3 = UnityEngine.Vector3;
 
 public enum TypeFallDamage
 {
@@ -23,7 +25,7 @@ public class CharacterControllerV1 : MonoBehaviour
     [SerializeField] private float jumpChargeLimit = 0.0f; // Límite de carga del salto
     [SerializeField] private float jumpChargeMax = 1f; // Máximo de carga del salto
     [SerializeField] private float lookSpeed = 5f; // Velocidad de rotación de la cámara
-    [SerializeField][Range(1f, 1.5f)] private float jumpOnUpMultiplier = 1.05f;
+    [SerializeField][Range(0f, 2f)] private float jumpOnUpMultiplier = 1.05f;
 
     [Header("Basic movement HUD")]
     [SerializeField] private Slider loadJumpSlider;
@@ -163,7 +165,13 @@ public class CharacterControllerV1 : MonoBehaviour
                 if (!isJumping && jumpCharge > jumpChargeLimit)
                 {
                     // Si no se está ejecutando el salto y se ha cargado lo suficiente
-                    Vector3 jumpDirection = transform.forward + Vector3.up * jumpOnUpMultiplier; // Dirección del salto
+                    Vector3 jumpDirection = jumpDirection = transform.forward + Vector3.up * jumpOnUpMultiplier;
+
+                    //if (jumpCharge < jumpChargeLimit / 2)
+                    //    jumpDirection = transform.forward + (Vector3.up * jumpOnUpMultiplier) + (Vector3.up * jumpCharge*2); // Dirección del salto
+                    //else
+                    //    jumpDirection = transform.forward + (Vector3.up * jumpOnUpMultiplier) + (Vector3.up * jumpCharge); // Dirección del salto
+                    
                     rb.AddForce(jumpDirection * jumpForce * jumpCharge, ForceMode.Impulse); // Ejecutar el salto
                     isJumping = true; // Marcar que se está ejecutando el salto
                 }
