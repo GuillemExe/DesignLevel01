@@ -51,9 +51,6 @@ public class CharacterControllerV1 : MonoBehaviour
     private float setDamage;
     private TypeFallDamage typeFallDamage = TypeFallDamage.None;
 
-    [Header("Collider")]
-    [SerializeField] private SphereCollider sphereCollider;
-
     [Header("Unity Events")]
     [SerializeField] private UnityEvent playerDies;
 

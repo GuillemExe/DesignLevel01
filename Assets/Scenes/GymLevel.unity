@@ -10520,7 +10520,7 @@ PrefabInstance:
     - target: {fileID: 7786466622545621266, guid: 740f957d41b9f7446be6a4007da1076f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7786466622545621266, guid: 740f957d41b9f7446be6a4007da1076f,
         type: 3}
@@ -15477,6 +15477,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8308794133653140705, guid: a9bac33c412275c4ea4ef71f3586db48,
+        type: 3}
+      propertyPath: loadJumpSlider
+      value: 
+      objectReference: {fileID: 458159668}
+    - target: {fileID: 8308794133653140705, guid: a9bac33c412275c4ea4ef71f3586db48,
+        type: 3}
+      propertyPath: currentLifeSlider
+      value: 
+      objectReference: {fileID: 96470950}
     - target: {fileID: 8308794134500914332, guid: a9bac33c412275c4ea4ef71f3586db48,
         type: 3}
       propertyPath: m_RootOrder
@@ -16211,7 +16221,7 @@ PrefabInstance:
     - target: {fileID: 7786466622545621266, guid: 740f957d41b9f7446be6a4007da1076f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7786466622545621266, guid: 740f957d41b9f7446be6a4007da1076f,
         type: 3}
@@ -21651,7 +21661,7 @@ PrefabInstance:
     - target: {fileID: 7786466622545621266, guid: 740f957d41b9f7446be6a4007da1076f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7786466622545621266, guid: 740f957d41b9f7446be6a4007da1076f,
         type: 3}
@@ -24016,7 +24026,7 @@ Transform:
   - {fileID: 1930184399}
   - {fileID: 1755480212}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &794596820
 Mesh:
