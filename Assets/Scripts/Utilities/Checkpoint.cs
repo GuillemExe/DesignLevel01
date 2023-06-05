@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform spawnPoint;
+    private bool reached;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Transform GetSpawnPoint() => spawnPoint;
+
+    public bool IsReached() => reached;
+    public void SetReached(bool newStatusReach) => reached = newStatusReach;
 }

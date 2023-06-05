@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8940868785134601735}
   - component: {fileID: 8940868785134601752}
   - component: {fileID: 8940868785134601753}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 8940868785876096375}
   - component: {fileID: 8940868785876096328}
   - component: {fileID: 8940868785876096329}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
